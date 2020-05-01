@@ -6,7 +6,7 @@ const queries = {
         email,
         password,
         state,
-        is_admin
+        type
     ) VALUES($1, $2, $3, crypt( $4, gen_salt('bf')), $5, $6) RETURNING *`,
     findUserByEmail: `
         SELECT * FROM verge WHERE email = ($1)`,
