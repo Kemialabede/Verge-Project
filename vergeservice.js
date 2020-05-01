@@ -106,9 +106,9 @@ async function authVerification(req, res, next){
     const token = auth;
     if(!token) {
         console.log("apple")
-        return res.status(401).json({
+        return res.status(403).json({
             status: "forbidden",
-            code: 401,
+            code: 403,
             message: "Unauthenticated Access",
         })
     }
@@ -271,7 +271,7 @@ async function getAllParcels(){
       status: "success",
       code: 200,
       message: "Fetched all blogs successfully",
-      parcels: rows,
+      data: rows,
     });
   }  catch(e) {
      return Promise.reject({
