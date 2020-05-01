@@ -81,6 +81,7 @@ async function checkIfUserExist(email, password) {
         message: "Login...",
         id: rows[0].id,
         admin: rows[0].is_admin,
+        data: rows
       });
     }
     if (rowCount == 0) {
