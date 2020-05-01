@@ -35,11 +35,11 @@ router.post(
         next();
     },
     async (req, res) => {
-        const is_admin = "NO";
+        const type = "user";
         const { email } = req.body;
         try {
             await checkIfEmailDoesNotExist(email);
-            const result = await createNewUser(req.body, is_admin)
+            const result = await createNewUser(req.body, type)
             return res.status(201).json(result);
         } catch (e) {
             console.log(e)
@@ -61,11 +61,11 @@ router.post(
         next();
     },
     async (req, res) => {
-        const is_admin = "YES";
+        const type = "super admin";
         const { email } = req.body;
         try {
             await checkIfEmailDoesNotExist(email);
-            const result = await createNewUser(req.body, is_admin)
+            const result = await createNewUser(req.body, type)
             return res.status(201).json(result);
         } catch (e) {
             console.log(e)
