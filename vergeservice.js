@@ -210,6 +210,7 @@ async function authorisationById(adminfromtoken, role){
       })
   }
 }
+
 async function getParcelsByUserId(user_id) {
   const queryObj = {
     text: queries.findParcelByUserId,
