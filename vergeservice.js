@@ -5,11 +5,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 
-async function createNewUser(body, is_admin) {
+async function createNewUser(body, type) {
     const { first_name, last_name, email, password, state} = body;
     const queryObj = {
         text: queries.addNewUser,
-        values: [ first_name, last_name, email, password, state, is_admin],
+        values: [ first_name, last_name, email, password, state, type],
     };
 
     try {
@@ -80,7 +80,7 @@ async function checkIfUserExist(email, password) {
         code: 200,
         message: "Login...",
         id: rows[0].id,
-        admin: rows[0].is_admin,
+        type: rows[0].type,
         data: rows
       });
     }

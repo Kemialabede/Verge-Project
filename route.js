@@ -93,7 +93,7 @@ router.post(
         try {
             console.log("check")
             const result = await checkIfUserExist(email, password);
-            const token = jwt.sign({id: result.id, is_admin: result.admin}, process.env.SECRET_TOKEN)
+            const token = jwt.sign({id: result.id, type: result.type}, process.env.SECRET_TOKEN)
             res.header("auth", token).json({...result, token})
                 console.log("next")
           return res.status(200).json(result)
