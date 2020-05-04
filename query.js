@@ -32,7 +32,7 @@ const queries = {
     getAParcelByUserIdAndParcelId: `
     SELECT * FROM userparcel WHERE user_id=($1) AND id=($2)`,
     updateDestinationById:`
-    UPDATE userparcel SET destination=($1), updated_at=($2) WHERE id=($3)
+    UPDATE userparcel SET destination=($1) WHERE id=($2)
     `,
     findUserIdByParcelId:`
     SELECT user_id FROM userparcel WHERE id=($1)

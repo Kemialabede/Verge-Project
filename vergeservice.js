@@ -287,11 +287,9 @@ async function getAllParcels(){
   }
 }
 async function changeDestination(id, destination){
-  const d = new Date();
-  const updated_at = moment(d).format("YYYY-MM-DD HH:mm:ss");
   const queryObj = {
       text: queries.updateDestinationById,
-      values: [destination, id, updated_at],
+      values: [destination, id],
   }
 
   try{
