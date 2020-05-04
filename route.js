@@ -61,9 +61,10 @@ router.post(
         next();
     },
     async (req, res) => {
-        const type = "admin";
+        let type = "admin";
         const { email } = req.body;
         try {
+            await authorisationById(req.user.type, "super admin")
             await checkIfEmailDoesNotExist(email);
             const result = await createNewUser(req.body, type)
             return res.status(201).json(result);
