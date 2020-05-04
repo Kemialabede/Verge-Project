@@ -135,7 +135,7 @@ async function createNewParcel(body, user_id) {
   const status = "Pending";
   const queryObj = {
     text: queries.addNewParcel,
-    values: [ user_id, price, weight, location, destination, sender_name, sender_note, status, created_at, created_at]
+    values: [ user_id, price, weight, location, destination, sender_name, sender_note, status, created_at]
 };
 try {
   const { rowCount } = await db.query(queryObj);
