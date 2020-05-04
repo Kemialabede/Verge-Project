@@ -1,3 +1,4 @@
+const moment = require("moment");
 const queries = require("./query");
 const db = require("./database");
 const jwt = require('jsonwebtoken');
@@ -128,11 +129,13 @@ async function authVerification(req, res, next){
 }
 
 async function createNewParcel(body, user_id) {
+  const d = new Date();
+  const created_at = moment(d).format("YYYY-MM-DD HH:mm:ss");
   const { price, weight, location, destination, sender_name, sender_note } = body
   const status = "Pending";
   const queryObj = {
     text: queries.addNewParcel,
-    values: [ user_id, price, weight, location, destination, sender_name, sender_note, status]
+    values: [ user_id, price, weight, location, destination, sender_name, sender_note, status, created_at, created_at]
 };
 try {
   const { rowCount } = await db.query(queryObj);
@@ -284,9 +287,11 @@ async function getAllParcels(){
   }
 }
 async function changeDestination(id, destination){
+  const d = new Date();
+  const updated_at = moment(d).format("YYYY-MM-DD HH:mm:ss");
   const queryObj = {
       text: queries.updateDestinationById,
-      values: [destination, id],
+      values: [destination, id, updated_at],
   }
 
   try{
