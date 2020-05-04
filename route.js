@@ -65,7 +65,6 @@ router.post(
         const { email } = req.body;
         try {
             await checkIfEmailDoesNotExist(email);
-            await authorisationById(req.user.type, "super admin")
             const result = await createNewUser(req.body, type)
             return res.status(201).json(result);
         } catch (e) {
@@ -123,7 +122,7 @@ router.post(
       authVerification,
       async (req, res) => {
         try {
-            await authorisationById(req.user.is_admin, "NO")
+            await authorisationById(req.user.type, "user")
             const result = await createNewParcel(req.body, req.user.id);
             return res.status(201).json(result);
         } catch (e) {
@@ -152,7 +151,7 @@ router.get(
     authVerification,
     async (req, res) => {
         try {
-            await authorisationById(req.user.is_admin, "YES")
+            await authorisationById(req.user.type, "admin")
             const result = await getAllParcels();
             return res.status(200).json(result);
         } catch (e) {
@@ -180,7 +179,7 @@ router.get(
           const user_id = req.user.id
           const { id } = req.params;
         try {
-        await authorisationById(req.user.is_admin, "NO")
+        await authorisationById(req.user.type, "user")
         const result = await getParcelByUserIdAndParcelId(user_id, id)
             return res.status(201).json({result});
         } catch (e) {
@@ -206,7 +205,7 @@ router.put(
         const { id } = req.params;
         const { destination } = req.body;
         try {
-            await authorisationById(req.user.is_admin, "NO")
+            await authorisationById(req.user.type, "user")
             const result = await changeDestination(id, destination);
             return res.status(200).json(result);
         } catch (e) {
@@ -233,7 +232,7 @@ router.delete(
         const { status } = req.body;
         const { id } = req.params;
         try{
-            await authorisationById(req.user.is_admin, "NO")
+            await authorisationById(req.user.type, "user")
             const result =await deleteParcel(id);
             return res.status(201).json({
                 message: "Deleted successfully"
@@ -261,7 +260,7 @@ router.put(
     authVerification,
     async (req, res, next) =>{
         try{
-            await authorisationById(req.user.is_admin, "YES")
+            await authorisationById(req.user.type, "admin")
             const thisFunction = "Change status"
             await checkParcelStatus(req.params.id, thisFunction);
         } catch(e) {
@@ -298,7 +297,7 @@ router.put(
     authVerification,
     async (req, res, next) =>{
         try{
-            await authorisationById(req.user.is_admin, "YES")
+            await authorisationById(req.user.type, "admin")
             const thisFunction = "Change Location"
             await checkParcelStatus(req.params.id, thisFunction);
         } catch(e) {
