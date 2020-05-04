@@ -23,7 +23,7 @@ const queries = {
         sender_note,
         status,
         created_at
-    ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
+    ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
     selectadminById:`
     SELECT is_admin FROM verge WHERE id=($1)`,
     findParcelByUserId: `
