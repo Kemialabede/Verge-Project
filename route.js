@@ -60,8 +60,9 @@ router.post(
         }
         next();
     },
+    authVerification,
     async (req, res) => {
-        const type = "super admin";
+        const type = "admin";
         const { email } = req.body;
         try {
             await authorisationById(req.user.type, "super admin")
