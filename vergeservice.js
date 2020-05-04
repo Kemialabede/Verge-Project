@@ -425,9 +425,11 @@ async function changeStatus (id, status) {
 }
 
 async function changeLocation (id, location) {
+  const d = new Date();
+  const updated_at = moment(d).format("YYYY-MM-DD HH:mm:ss");
   const queryObj = {
       text: queries.updateLocationById,
-      values: [location, id],
+      values: [location, updated_at, id],
   }
 
   try{
@@ -455,37 +457,39 @@ async function changeLocation (id, location) {
       })
   }
 }
-async function changeLocation (id, location) {
-    const queryObj = {
-        text: queries.changeLocationById,
-        values: [location, id],
-    }
+// async function changeLocation (id, location) {
+//     const d = new Date();
+//     const updated_at = moment(d).format("YYYY-MM-DD HH:mm:ss");
+//     const queryObj = {
+//         text: queries.changeLocationById,
+//         values: [location, updated_at, id],
+//     }
 
-    try{
-        const { rowCount } = await db.query(queryObj);
-        if ( rowCount == 0){
-            return Promise.reject({
-                status: "error",
-                code: 500,
-                message: "Parcel not found",
-            })
-        }
-        if(rowCount > 0){
-            return Promise.resolve({
-                status: "success",
-                code: 200,
-                message: "Changed location successfully",
-            })
-        }
-    } catch (e){
-        console.log(e);
-        return Promise.reject ({
-            status: "error",
-            code: 500,
-            message: "Error changing location",
-        })
-    }
-}
+//     try{
+//         const { rowCount } = await db.query(queryObj);
+//         if ( rowCount == 0){
+//             return Promise.reject({
+//                 status: "error",
+//                 code: 500,
+//                 message: "Parcel not found",
+//             })
+//         }
+//         if(rowCount > 0){
+//             return Promise.resolve({
+//                 status: "success",
+//                 code: 200,
+//                 message: "Changed location successfully",
+//             })
+//         }
+//     } catch (e){
+//         console.log(e);
+//         return Promise.reject ({
+//             status: "error",
+//             code: 500,
+//             message: "Error changing location",
+//         })
+//     }
+// }
 async function deleteParcel(id) {
     const queryObj = {
         text: queries.deleteParcel,

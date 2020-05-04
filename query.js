@@ -47,7 +47,7 @@ const queries = {
     UPDATE userparcel SET status=($1), updated_at=($2) WHERE id=($3)
     `,
     changeLocationById: `
-    UPDATE userparcel SET location=($1) WHERE id=($2)
+    UPDATE userparcel SET location=($1), updated_at=($2) WHERE id=($3)
     `,
     deleteParcel: `
     DELETE FROM userparcel WHERE id=($1)      
