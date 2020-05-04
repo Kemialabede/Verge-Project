@@ -391,9 +391,11 @@ async function checkParcelStatus(id_parcel, cancelOrder){
   }
 }
 async function changeStatus (id, status) {
+    const d = new Date();
+    const updated_at = moment(d).format("YYYY-MM-DD HH:mm:ss");
   const queryObj = {
       text: queries.updateStatusById,
-      values: [status, id],
+      values: [status, updated_at, id],
   }
 
   try{
