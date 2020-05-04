@@ -135,7 +135,7 @@ async function createNewParcel(body, user_id) {
   const status = "Pending";
   const queryObj = {
     text: queries.addNewParcel,
-    values: [ user_id, price, weight, location, destination, sender_name, sender_note, status, created_at]
+    values: [ user_id, price, weight, location, destination, sender_name, sender_note, status, created_at, created_at],
 };
 try {
   const { rowCount } = await db.query(queryObj);
@@ -287,9 +287,11 @@ async function getAllParcels(){
   }
 }
 async function changeDestination(id, destination){
-  const queryObj = {
+    const d = new Date();
+    const updated_at = moment(d).format("YYYY-MM-DD HH:mm:ss");
+    const queryObj = {
       text: queries.updateDestinationById,
-      values: [destination, id],
+      values: [destination, updated_at, id],
   }
 
   try{
