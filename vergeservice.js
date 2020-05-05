@@ -246,7 +246,7 @@ async function getParcelByUserIdAndParcelId(user_id, id) {
         status: "success",
         code: 200,
         message: "Parcel gotten successfully",
-        parcels: rows,
+        data: rows,
       });
     }
   } catch (e) {

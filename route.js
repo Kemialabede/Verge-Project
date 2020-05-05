@@ -294,8 +294,8 @@ router.put(
     async (req, res, next) =>{
         try{
             await authorisationById(req.user.type, "admin")
-            const thisFunction = "Change Location"
-            await checkParcelStatus(req.params.id, thisFunction);
+            // const thisFunction = "Change Location"
+            // await checkParcelStatus(req.params.id, thisFunction);
         } catch(e) {
             return res.status(e.code).json(e);
         }
