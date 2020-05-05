@@ -12,7 +12,6 @@ async function createNewUser(body, type) {
         text: queries.addNewUser,
         values: [ first_name, last_name, email, password, state, type],
     };
-
     try {
         const { rowCount } = await db.query(queryObj)
         if (rowCount == 0) {
@@ -45,11 +44,8 @@ async function checkIfEmailDoesNotExist(email) {
     values: [email],
   };
   try {
-    console.log("kemi")
     const { rowCount } = await db.query(queryObj);
-    console.log("ayo")
     if (rowCount == 0) {
-      console.log("funmi")
       return Promise.resolve()
     }
     if (rowCount > 0) {
@@ -107,7 +103,6 @@ async function authVerification(req, res, next){
     const { auth } = req.headers;
     const token = auth;
     if(!token) {
-        console.log("apple")
         return res.status(403).json({
             status: "forbidden",
             code: 403,
@@ -117,7 +112,6 @@ async function authVerification(req, res, next){
     try {
         const decoded = jwt.verify(token, process.env.SECRET_TOKEN)
         req.user = decoded;
-        console.log(req.user);
     } catch(e){
         return res.status(400).json({
             status: "error",
@@ -192,8 +186,6 @@ async function authenticateById(id){
 }
 async function authorisationById(adminfromtoken, role){
   try{
-      console.log(adminfromtoken)
-      console.log(role)
       if (adminfromtoken == role){
           return Promise.resolve();
       }
@@ -270,7 +262,6 @@ async function getAllParcels(){
     text: queries.findAllParcels
   };
   try{
-      console.log("dog")
     const { rows} = await db.query(queryObj);
     return Promise.resolve({
       status: "success",

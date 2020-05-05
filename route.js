@@ -89,15 +89,11 @@ router.post(
         next();
     },
      async (req, res) => {
-         console.log("faith")
         const { email, password } = req.body;
-        console.log("fate")
         try {
-            console.log("check")
             const result = await checkIfUserExist(email, password);
             const token = jwt.sign({id: result.id, type: result.type}, process.env.SECRET_TOKEN)
             res.header("auth", token).json({...result, token})
-                console.log("next")
           return res.status(200).json(result)
         } catch (e) {
             console.log(e)
@@ -112,9 +108,7 @@ router.post(
     "/parcel",
     (req, res, next) => {
         const { price, weight, location, destination, sender_name, sender_note } = req.body
-
         if( !price || !weight || !location || !destination || !sender_name || !sender_note) {
-            console.log("temi")
             return res.status(400).json({
                 message: "Please fill all fields"
             });
