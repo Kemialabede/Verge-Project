@@ -310,7 +310,7 @@ router.put(
             return res.status(200).json(result);
         } catch (e) {
             console.log(e);
-            return res.state(e.code).json(e);
+            return res.status(e.code).json(e);
         }
 
     }
